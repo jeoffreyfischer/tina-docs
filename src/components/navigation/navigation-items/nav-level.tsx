@@ -168,34 +168,38 @@ export const NavLevel: React.FC<NavLevelProps> = ({
               </span>
             </NavTitle>
           </DynamicLink>
-        ) : (
-          <NavTitle
-            level={level}
-            selected={selected && !childSelected}
-            childSelected={childSelected}
-            onClick={() => {
-              setExpanded(!expanded);
-            }}
-          >
-            <span className="flex items-center justify-start font-body w-full">
-              <span
-                className="flex-1 min-w-0"
-                style={{ overflowWrap: "anywhere" }}
-              >
-                {categoryData.title}
-              </span>
-              {categoryData.items && (
-                <ChevronRightIcon
-                  className={`ml-2 flex-shrink-0 w-5 h-auto transition-[300ms] ease-out group-hover:rotate-90 ${
-                    level < 1
-                      ? "text-neutral-text font-bold"
-                      : "text-neutral-text-secondary group-hover:text-neutral-text"
-                  } ${expanded ? "rotate-90" : ""}`}
-                />
-              )}
-            </span>
-          </NavTitle>
-        )}
+                 ) : (
+           <NavTitle
+             level={level}
+             selected={selected && !childSelected}
+             childSelected={childSelected}
+             onClick={() => {
+               setExpanded(!expanded);
+             }}
+           >
+             <span className="flex items-center justify-start font-body w-full">
+               {/* Add orange square before main section titles (level 0) */}
+               {level === 0 && categoryData.title && (
+                 <div className="w-2 h-2 bg-[#EC4815] mr-2 flex-shrink-0"></div>
+               )}
+               <span
+                 className="flex-1 min-w-0"
+                 style={{ overflowWrap: "anywhere" }}
+               >
+                 {categoryData.title}
+               </span>
+               {categoryData.items && (
+                 <ChevronRightIcon
+                   className={`ml-2 flex-shrink-0 w-5 h-auto transition-[300ms] ease-out group-hover:rotate-90 ${
+                     level < 1
+                       ? "text-neutral-text font-bold"
+                       : "text-neutral-text-secondary group-hover:text-neutral-text"
+                   } ${expanded ? "rotate-90" : ""}`}
+                 />
+               )}
+             </span>
+           </NavTitle>
+         )}
       </div>
       {categoryData.items && (
         <AnimateHeight
